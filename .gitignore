@@ -200,3 +200,4 @@ cython_debug/
 /examples/**/checkpoints
 /examples/**/output
 /examples/**/datasets
+/bridge_train_data.tar.gz

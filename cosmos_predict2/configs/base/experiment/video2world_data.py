@@ -37,7 +37,8 @@ cs = ConfigStore.instance()
 example_video_dataset = L(Dataset)(
     dataset_dir="datasets/cosmos_predict2_video2world_dataset",
     num_frames=93,
-    video_size=(704, 1280),  # 720 resolution, 16:9 aspect ratio
+    # video_size=(704, 1280),  # 720 resolution, 16:9 aspect ratio
+    video_size=(480,832)
 )
 
 dataloader_video_train = L(DataLoader)(
@@ -48,7 +49,6 @@ dataloader_video_train = L(DataLoader)(
     num_workers=8,
     pin_memory=True,
 )
-
 # torchrun --nproc_per_node=8 --master_port=12341 -m scripts.train --config=cosmos_predict2/configs/base/config.py -- experiment=predict2_video2world_training_2b_video2world_data
 predict2_video2world_training_2b_video2world_data = dict(
     defaults=[
@@ -66,6 +66,7 @@ predict2_video2world_training_2b_video2world_data = dict(
     ),
     model=dict(
         config=dict(
+            fsdp_shard_size=8,
             pipe_config=dict(
                 ema=dict(enabled=True),
                 prompt_refiner_config=dict(enabled=False),
@@ -152,7 +153,7 @@ for _item in [
     # 2b, video2world_data
     predict2_video2world_training_2b_video2world_data,
     # 14b, video2world_data
-    predict2_video2world_training_14b_video2world_data,
+    # predict2_video2world_training_14b_video2world_data,
 ]:
     # Get the experiment name from the global variable.
     experiment_name = [name.lower() for name, value in globals().items() if value is _item][0]  # noqa: RUF015

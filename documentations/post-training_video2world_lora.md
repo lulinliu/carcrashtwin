@@ -126,7 +126,8 @@ predict2_video2world_lora_training_2b_custom_data = dict(
             # LoRA configuration parameters
             lora_rank=16,
             lora_alpha=16,
-            lora_target_modules="q_proj,k_proj,v_proj,output_proj,mlp.layer1,mlp.layer2",
+            # lora_target_modules="q_proj,k_proj,v_proj,output_proj,mlp.layer1,mlp.layer2",
+            lora_target_modules="q_proj,k_proj,v_proj",
             init_lora_weights=True,
             pipe_config=dict(
                 ema=dict(enabled=True),     # enable EMA during training
