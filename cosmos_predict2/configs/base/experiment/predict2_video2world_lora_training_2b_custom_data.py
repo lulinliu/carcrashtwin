@@ -6,6 +6,11 @@ from megatron.core import parallel_state
 from torch.utils.data import DataLoader, DistributedSampler
 
 from cosmos_predict2.data.dataset_video import Dataset
+# WARNING:
+# 
+# EXP="predict2_video2world_lora_training_2b_custom_data"
+# Your EXP correspond to the configs setting
+# 
 
 def get_sampler(dataset) -> DistributedSampler:
     return DistributedSampler(
@@ -17,27 +22,21 @@ def get_sampler(dataset) -> DistributedSampler:
     )
 cs = ConfigStore.instance()
 
-# 这是一个通用的技巧，用于延迟加载，避免循环导入
-# L = LazyLoader("imaginaire.config.config_utils", globals(), "L")
 from imaginaire.lazy_config import LazyCall as L
 
-# =================================================================================
-# 1. 定义你的数据集和数据加载器 (Dataloader)
-# =================================================================================
-# TODO: 你需要修改这里的 `dataset_dir` 为你自己的数据集路径
-#       并根据需要调整 `video_size`, `num_frames` 等参数
 print("[DEBUG] loaded experiment: predict2_video2world_lora_training_2b_custom_data")
 
 custom_video_lora_dataset = L(Dataset)(
-    dataset_dir="datasets/custom_video2world_lora_dataset",  # <--- 修改这里！改成你的数据集路径
+    dataset_dir="carcrash_full/",  # <--- 修改这里！改成你的数据集路径
     num_frames=93,                                          # 视频帧数
-    video_size=(480,832),                                 # 视频分辨率 (高, 宽)
+    video_size=(480,832),                                 # resolution (H * W)
+    # video_size=(704,1280)  --> 720p
 )
 
 dataloader_video_train_lora = L(DataLoader)(
     dataset=custom_video_lora_dataset,
     sampler=L(get_sampler)(dataset=custom_video_lora_dataset),
-    batch_size=1,          # LoRA 内存效率高，可以适当增大 batch size
+    batch_size=1,          #  batch size
     drop_last=True,
     num_workers=8,
     pin_memory=True,
@@ -59,15 +58,15 @@ predict2_video2world_lora_training_2b_custom_data = dict(
     job=dict(
         project="posttraining",
         group="video2world_lora",
-        name="2b_my_custom_data_lora",  # <--- 你可以给你的实验起一个名字
+        name="2b_my_custom_data_lora_car_crash_full_10k_afterfilter_second",  # Name the experiment --> affect the output directory path
     ),
     model=dict(
         config=dict(
             train_architecture="lora",  # 启用 LoRA
-            # --- LoRA 关键参数 ---
-            lora_rank=8,
-            lora_alpha=8,
+            lora_rank=8, # default 16
+            lora_alpha=8,  # default 16
             lora_target_modules="q_proj,k_proj,v_proj",
+            # lora_target_modules="q_proj,k_proj,v_proj,output_proj,mlp.layer1,mlp.layer2". # default
             init_lora_weights=True,
             # ---------------------
             pipe_config=dict(
@@ -80,23 +79,24 @@ predict2_video2world_lora_training_2b_custom_data = dict(
     model_parallel=dict(
         context_parallel_size=4,
     ),
-    dataloader_train=dataloader_video_train_lora, # 使用上面定义好的数据加载器
+    dataloader_train=dataloader_video_train_lora,
     trainer=dict(
         distributed_parallelism="fsdp",
         callbacks=dict(iter_speed=dict(hit_thres=10)),
-        max_iter=10,                      # LoRA 训练迭代次数
+        max_iter=10000,                      # LoRA 训练迭代次数
     ),
     checkpoint=dict(
-        save_iter=5,                      # 每 500 次迭代保存一次模型
+        save_iter=2000,                      # 2k 保存一次
     ),
     optimizer=dict(
-        lr=2 ** (-12),                      # LoRA 使用较高的学习率
+        # lr=2 ** (-12),
+        lr = 2.5e-4                      # LoRA 使用较高的学习率
     ),
-    scheduler=dict(
-        warm_up_steps=[0],
-        cycle_lengths=[2_000],
-        f_max=[0.6],
-        f_min=[0.0],
+    scheduler=dict(        # 老师 
+        warm_up_steps=[500],
+        cycle_lengths=[5_000],     # 最大迭代数
+        f_max=[1.0],
+        f_min=[0.1],
     ),
 )
 
@@ -158,10 +158,7 @@ predict2_video2world_lora_training_2b_custom_data = dict(
 # )
 
 
-# # =================================================================================
-# 4. 注册你的配置到 ConfigStore
-# =================================================================================
-# 这一步非常重要，它让训练脚本能够通过名字找到你的配置
+
 for _item in [
     predict2_video2world_lora_training_2b_custom_data,
 ]:
