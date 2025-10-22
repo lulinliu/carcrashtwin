@@ -17,23 +17,15 @@ module load cuda/12.6
 PROJECT_DIR=/scratch/10102/hh29499/carcrashtwin
 cd "$PROJECT_DIR"
 
-# ---- SAFE defaults under `set -u` ----
-: "${PYTHONPATH:=}"
-: "${HF_HOME:=$SCRATCH/.cache/huggingface}"
-: "${TRANSFORMERS_CACHE:=$HF_HOME/hub}"
-: "${TORCH_HOME:=$HF_HOME/torch}"
-
-# ✅ 只加入你自己的包目录，避免遮蔽第三方库（不要加仓库根）
-export PYTHONPATH="$PROJECT_DIR/cosmos_predict2:$PROJECT_DIR/imaginaire:${PYTHONPATH}"
-
-export HF_HOME TRANSFORMERS_CACHE TORCH_HOME
+# caches (optional)
+export HF_HOME="${HF_HOME:-$SCRATCH/.cache/huggingface}"
+export TRANSFORMERS_CACHE="${TRANSFORMERS_CACHE:-$HF_HOME/hub}"
+export TORCH_HOME="${TORCH_HOME:-$HF_HOME/torch}"
 
 # NCCL/CPU env
 export NCCL_DEBUG=INFO
 export TORCH_NCCL_BLOCKING_WAIT=1
 export NCCL_ASYNC_ERROR_HANDLING=1
-# 如遇网卡冲突/超时再启用：
-# export NCCL_SOCKET_IFNAME=^lo,docker0
 export OMP_NUM_THREADS=8
 
 MASTER_ADDR=$(scontrol show hostnames "$SLURM_JOB_NODELIST" | head -n1)
@@ -42,37 +34,29 @@ NNODES=${SLURM_JOB_NUM_NODES}
 
 srun --ntasks=${NNODES} --ntasks-per-node=1 --export=ALL --kill-on-bad-exit=1 bash -lc '
   module load gcc/13.2.0
-  module load cuda/12.6   # ✅ 在 srun 中也要加载
+  module load cuda/12.6
 
-  # 选用更新的 libstdc++（修复 GLIBCXX_3.4.32 之类）
-  GCL=$(gcc --print-file-name=libstdc++.so.6)
-  export LD_LIBRARY_PATH="$(dirname "$GCL"):${LD_LIBRARY_PATH:-}"
-
-  # Conda activate 的 hook 可能用到未定义变量，避开 set -u
+  # conda
   set +u
   source /scratch/10102/hh29499/anaconda/etc/profile.d/conda.sh
   conda activate cosmos-predict2
   set -u
 
-  echo "Node=$(hostname)"
-  echo "libstdc++ -> $(readlink -f "$(dirname "$GCL")/libstdc++.so.6")"
+  # 👇 kill the shadowing
+  unset PYTHONPATH
 
-  # ---- Sanity checks：在多节点启动前快速失败 ----
-  python - <<'"'"'PY'"'"'
-import importlib.util as u, sys
-# 1) transformers & tokenizers 不应被项目同名包遮蔽
-spec_tok = u.find_spec("tokenizers")
-print("tokenizers spec:", spec_tok)
-from tokenizers import Tokenizer
-print("Tokenizer OK:", Tokenizer)
-
-# 2) decord 要能导入 VideoReader
-from decord import VideoReader, cpu
-print("decord OK:", VideoReader, cpu)
+  # quick sanity: ensure we get HF tokenizers from site-packages
+  python - << "PY"
+import tokenizers, sys, os
+print("tokenizers from:", tokenizers.__file__)
+assert "site-packages/tokenizers" in tokenizers.__file__, "Still shadowed by local package!"
 PY
-  # ---- Sanity checks end ----
 
   export NODE_RANK=${SLURM_PROCID}
+
+  # run from repo root so local packages (cosmos_predict2, imaginaire, scripts) are importable
+  cd /scratch/10102/hh29499/carcrashtwin
+
   torchrun \
     --nproc_per_node=1 \
     --nnodes='"${NNODES}"' \
