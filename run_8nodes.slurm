@@ -10,8 +10,6 @@
 
 set -euo pipefail
 
-module purge
-
 PROJECT_DIR=/scratch/10102/hh29499/carcrashtwin
 cd "$PROJECT_DIR"
 
@@ -20,13 +18,8 @@ MASTER_ADDR=$(scontrol show hostnames "$SLURM_JOB_NODELIST" | head -n1)
 MASTER_PORT=${MASTER_PORT:-12341}
 NNODES=${SLURM_JOB_NUM_NODES}
 
-srun --ntasks=${NNODES} --ntasks-per-node=1 --export=ALL --kill-on-bad-exit=1 bash -lc '
-  set +u
-  source /scratch/10102/hh29499/anaconda/etc/profile.d/conda.sh
-  conda activate cosmos-predict2
-  set -u
+srun --ntasks=${NNODES} --ntasks-per-node=1  bash -lc '
   # avoid local shadowing
-  unset PYTHONPATH
   export NODE_RANK=${SLURM_PROCID}
   cd /scratch/10102/hh29499/carcrashtwin
   torchrun \
