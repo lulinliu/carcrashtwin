@@ -14,6 +14,23 @@ module purge
 module load gcc/13.2.0
 module load cuda/12.6
 
+# ---------- Your paths ----------
+export CUDA_HOME=/home1/apps/nvidia/Linux_aarch64/24.9/cuda/12.6
+export PATH="$CUDA_HOME/bin:${PATH:-}"
+export LD_LIBRARY_PATH="$CUDA_HOME/lib64:${LD_LIBRARY_PATH:-}"
+
+export CUDNN_PATH=/scratch/10102/hh29499/anaconda/envs/cosmos-predict2/lib/python3.10/site-packages/nvidia/cudnn
+export CUDNN_INCLUDE_DIR="$CUDNN_PATH/include"
+export CUDNN_LIBRARY="$CUDNN_PATH/lib/libcudnn.so"
+export CPATH="$CUDNN_INCLUDE_DIR:${CPATH:-}"
+export LIBRARY_PATH="$CUDNN_PATH/lib:${LIBRARY_PATH:-}"
+export LD_LIBRARY_PATH="$CUDNN_PATH/lib:${LD_LIBRARY_PATH:-}"
+
+export MATHLIBS=/home1/apps/nvidia/Linux_aarch64/24.9/math_libs/12.6
+export CPATH="$MATHLIBS/include:${CPATH:-}"
+export LIBRARY_PATH="$MATHLIBS/lib:${LIBRARY_PATH:-}"
+export LD_LIBRARY_PATH="$MATHLIBS/lib:${LD_LIBRARY_PATH:-}"
+
 PROJECT_DIR=/scratch/10102/hh29499/carcrashtwin
 cd "$PROJECT_DIR"
 
@@ -36,25 +53,49 @@ srun --ntasks=${NNODES} --ntasks-per-node=1 --export=ALL --kill-on-bad-exit=1 ba
   module load gcc/13.2.0
   module load cuda/12.6
 
+  # Re-apply these inside srun to be extra safe on each node
+  export CUDA_HOME=/home1/apps/nvidia/Linux_aarch64/24.9/cuda/12.6
+  export PATH="$CUDA_HOME/bin:${PATH:-}"
+  export LD_LIBRARY_PATH="$CUDA_HOME/lib64:${LD_LIBRARY_PATH:-}"
+
+  export CUDNN_PATH=/scratch/10102/hh29499/anaconda/envs/cosmos-predict2/lib/python3.10/site-packages/nvidia/cudnn
+  export CUDNN_INCLUDE_DIR="$CUDNN_PATH/include"
+  export CUDNN_LIBRARY="$CUDNN_PATH/lib/libcudnn.so"
+  export CPATH="$CUDNN_INCLUDE_DIR:${CPATH:-}"
+  export LIBRARY_PATH="$CUDNN_PATH/lib:${LIBRARY_PATH:-}"
+  export LD_LIBRARY_PATH="$CUDNN_PATH/lib:${LD_LIBRARY_PATH:-}"
+
+  export MATHLIBS=/home1/apps/nvidia/Linux_aarch64/24.9/math_libs/12.6
+  export CPATH="$MATHLIBS/include:${CPATH:-}"
+  export LIBRARY_PATH="$MATHLIBS/lib:${LIBRARY_PATH:-}"
+  export LD_LIBRARY_PATH="$MATHLIBS/lib:${LD_LIBRARY_PATH:-}"
+
   # conda
   set +u
   source /scratch/10102/hh29499/anaconda/etc/profile.d/conda.sh
   conda activate cosmos-predict2
   set -u
 
-  # 👇 kill the shadowing
+  # avoid local shadowing
   unset PYTHONPATH
 
-  # quick sanity: ensure we get HF tokenizers from site-packages
+  # sanity checks
   python - << "PY"
-import tokenizers, sys, os
+import sys, os
+import tokenizers
 print("tokenizers from:", tokenizers.__file__)
 assert "site-packages/tokenizers" in tokenizers.__file__, "Still shadowed by local package!"
+
+import decord, pathlib
+from decord import VideoReader, cpu
+so = pathlib.Path(decord.__file__).with_name("libdecord.so")
+print("decord py:", decord.__file__)
+print("libdecord.so exists:", so.exists(), "->", so)
+assert so.exists(), "libdecord.so not found next to decord; reinstall decord properly."
+print("decord OK:", VideoReader, cpu)
 PY
 
   export NODE_RANK=${SLURM_PROCID}
-
-  # run from repo root so local packages (cosmos_predict2, imaginaire, scripts) are importable
   cd /scratch/10102/hh29499/carcrashtwin
 
   torchrun \
