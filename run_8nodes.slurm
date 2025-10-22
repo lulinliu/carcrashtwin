@@ -13,7 +13,6 @@ set -euo pipefail
 module purge
 module load gcc/13.2.0
 module load cuda/12.6
-module load miniconda3
 
 PROJECT_DIR=/scratch/10102/hh29499/carcrashtwin
 mkdir -p "$PROJECT_DIR" ; cd "$PROJECT_DIR"
