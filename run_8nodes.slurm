@@ -39,23 +39,22 @@ MASTER_PORT=${MASTER_PORT:-12341}
 NNODES=${SLURM_JOB_NUM_NODES}
 
 srun --ntasks=${NNODES} --ntasks-per-node=1 --export=ALL --kill-on-bad-exit=1 bash -lc '
-  # Conda activate hooks may reference unset vars → shield from `-u`
+  module load gcc/13.2.0
+  GCL=$(gcc --print-file-name=libstdc++.so.6)
+  export LD_LIBRARY_PATH="$(dirname "$GCL"):${LD_LIBRARY_PATH:-}"
+
   set +u
   source /scratch/10102/hh29499/anaconda/etc/profile.d/conda.sh
   conda activate cosmos-predict2
   set -u
 
-  echo "Node=$(hostname)"
-  python -c "import sys, torch; print(\"exe:\", sys.executable, \"torch:\", torch.__version__, \"cuda:\", torch.cuda.is_available())"
+  echo "libstdc++ -> $(readlink -f "$(dirname "$GCL")/libstdc++.so.6")"
+  python -c "import ctypes; import os; print(\"LD_LIBRARY_PATH=\", os.environ.get(\"LD_LIBRARY_PATH\",\"\")[:200])"
 
   export NODE_RANK=${SLURM_PROCID}
-  torchrun \
-    --nproc_per_node=1 \
-    --nnodes='"${NNODES}"' \
-    --node_rank=${NODE_RANK} \
-    --master_addr='"${MASTER_ADDR}"' \
-    --master_port='"${MASTER_PORT}"' \
-    -m scripts.train \
-    --config=cosmos_predict2/configs/base/config.py \
+  torchrun --nproc_per_node=1 --nnodes='"${NNODES}"' \
+    --node_rank=${NODE_RANK} --master_addr='"${MASTER_ADDR}"' --master_port='"${MASTER_PORT}"' \
+    -m scripts.train --config=cosmos_predict2/configs/base/config.py \
     -- experiment=predict2_video2world_lora_training_2b_1019nuo_full
 '
+
