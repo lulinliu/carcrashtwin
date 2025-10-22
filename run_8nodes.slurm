@@ -78,26 +78,8 @@ srun --ntasks=${NNODES} --ntasks-per-node=1 --export=ALL --kill-on-bad-exit=1 ba
 
   # avoid local shadowing
   unset PYTHONPATH
-
-  # sanity checks
-  python - << "PY"
-import sys, os
-import tokenizers
-print("tokenizers from:", tokenizers.__file__)
-assert "site-packages/tokenizers" in tokenizers.__file__, "Still shadowed by local package!"
-
-import decord, pathlib
-from decord import VideoReader, cpu
-so = pathlib.Path(decord.__file__).with_name("libdecord.so")
-print("decord py:", decord.__file__)
-print("libdecord.so exists:", so.exists(), "->", so)
-assert so.exists(), "libdecord.so not found next to decord; reinstall decord properly."
-print("decord OK:", VideoReader, cpu)
-PY
-
   export NODE_RANK=${SLURM_PROCID}
   cd /scratch/10102/hh29499/carcrashtwin
-
   torchrun \
     --nproc_per_node=1 \
     --nnodes='"${NNODES}"' \
