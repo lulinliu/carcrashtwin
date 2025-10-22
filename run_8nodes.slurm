@@ -6,7 +6,7 @@
 #SBATCH -t 16:00:00
 #SBATCH -o /scratch/10102/hh29499/carcrashtwin/%x_%j.out
 #SBATCH -e /scratch/10102/hh29499/carcrashtwin/%x_%j.err
-#SBATCH --ntasks-per-node=1        # one task per node (1 GPU per node). DO NOT use --gpus-per-node/--gres
+#SBATCH --ntasks-per-node=1
 
 set -euo pipefail
 
@@ -14,18 +14,24 @@ module purge
 module load gcc/13.2.0
 module load cuda/12.6
 
-# ... keep your header and modules ...
-
 PROJECT_DIR=/scratch/10102/hh29499/carcrashtwin
 cd "$PROJECT_DIR"
-export PYTHONPATH="$PROJECT_DIR:$PYTHONPATH"
-export HF_HOME=$SCRATCH/.cache/huggingface
 
-# NCCL/CPU env (same as above)
+# --- SAFE defaults under `set -u` ---
+: "${PYTHONPATH:=}"
+: "${HF_HOME:=$SCRATCH/.cache/huggingface}"
+: "${TRANSFORMERS_CACHE:=$HF_HOME/hub}"
+: "${TORCH_HOME:=$HF_HOME/torch}"
+
+# Prepend project to PYTHONPATH safely
+export PYTHONPATH="${PROJECT_DIR}:${PYTHONPATH}"
+export HF_HOME TRANSFORMERS_CACHE TORCH_HOME
+
+# NCCL/CPU env
 export NCCL_DEBUG=INFO
 export TORCH_NCCL_BLOCKING_WAIT=1
 export NCCL_ASYNC_ERROR_HANDLING=1
-# export NCCL_SOCKET_IFNAME=^lo,docker0
+# export NCCL_SOCKET_IFNAME=^lo,docker0   # 只有出现网卡冲突再启用
 export OMP_NUM_THREADS=8
 
 MASTER_ADDR=$(scontrol show hostnames "$SLURM_JOB_NODELIST" | head -n1)
@@ -33,12 +39,15 @@ MASTER_PORT=${MASTER_PORT:-12341}
 NNODES=${SLURM_JOB_NUM_NODES}
 
 srun --ntasks=${NNODES} --ntasks-per-node=1 --export=ALL --kill-on-bad-exit=1 bash -lc '
+  # Conda activate hooks may reference unset vars → shield from `-u`
   set +u
   source /scratch/10102/hh29499/anaconda/etc/profile.d/conda.sh
   conda activate cosmos-predict2
   set -u
-  echo Node=$(hostname)
-  python -c "import sys; print(\"exe:\", sys.executable)"
+
+  echo "Node=$(hostname)"
+  python -c "import sys, torch; print(\"exe:\", sys.executable, \"torch:\", torch.__version__, \"cuda:\", torch.cuda.is_available())"
+
   export NODE_RANK=${SLURM_PROCID}
   torchrun \
     --nproc_per_node=1 \
