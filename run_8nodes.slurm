@@ -15,9 +15,7 @@ module load gcc/13.2.0
 module load cuda/12.6
 
 PROJECT_DIR=/scratch/10102/hh29499/carcrashtwin
-mkdir -p "$PROJECT_DIR" ; cd "$PROJECT_DIR"
-mkdir -p /scratch/10102/hh29499/carcrashtwin
-
+cd "$PROJECT_DIR"
 conda activate cosmos-predict2
 
 # NCCL/CPU env (safe defaults)
