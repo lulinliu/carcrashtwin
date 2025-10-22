@@ -7,7 +7,7 @@
 #SBATCH --output=slurm_logs/%x_%j.out
 #SBATCH --error=slurm_logs/%x_%j.err
 #SBATCH --ntasks-per-node=8               # 1 task per GPU
-#SBATCH --gpus-per-node=8                 # 8 GPUs per GH node
+#SBATCH --gres=gpu:8  
 #SBATCH --cpus-per-task=8                 # tweak if needed
 #SBATCH --mem=0                           # take full node memory
 
