@@ -37,6 +37,7 @@ except Exception as e:
 
 try:
     import decord
+    print("decord:", decord.__file__)
     from decord import VideoReader, cpu
     print("decord:", decord.__file__)
     so = pathlib.Path(decord.__file__).with_name("libdecord.so")
