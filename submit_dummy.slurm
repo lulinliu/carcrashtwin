@@ -2,7 +2,7 @@
 #SBATCH -J dummy_8n
 #SBATCH -A CGAI24022
 #SBATCH -p gh
-#SBATCH -N 8
+#SBATCH -N 2
 #SBATCH --ntasks-per-node=1
 #SBATCH -t 00:05:00
 #SBATCH -o /scratch/10102/hh29499/carcrashtwin/%x_%j.out
