@@ -4,6 +4,7 @@ export PYTHONNOUSERSITE=1; unset PYTHONPATH; export LD_LIBRARY_PATH="$CONDA_PREF
 python - <<'PY'
 import os, pathlib, torch, tokenizers
 import decord
+print("decord:", decord.__file__)
 from decord import VideoReader, cpu
 print("Node:", os.uname().nodename)
 print("CUDA visible:", torch.cuda.is_available(), "devices:", torch.cuda.device_count())
