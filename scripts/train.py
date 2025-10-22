@@ -13,12 +13,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
+import torch
+import decord
+from decord import VideoReader, cpu
+import torchvision
 import argparse
 import importlib
 import os
 
 from loguru import logger as logging
-from decord import VideoReader, cpu
+
 from imaginaire.config import Config, pretty_print_overrides
 from imaginaire.lazy_config import instantiate
 from imaginaire.lazy_config.lazy import LazyConfig
