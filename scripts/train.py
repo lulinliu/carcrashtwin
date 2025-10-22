@@ -18,7 +18,7 @@ import importlib
 import os
 
 from loguru import logger as logging
-
+from decord import VideoReader, cpu
 from imaginaire.config import Config, pretty_print_overrides
 from imaginaire.lazy_config import instantiate
 from imaginaire.lazy_config.lazy import LazyConfig
