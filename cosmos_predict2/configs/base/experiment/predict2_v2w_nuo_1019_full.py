@@ -35,7 +35,7 @@ cs = ConfigStore.instance()
 
 # Custom video dataset
 example_video_dataset = L(Dataset)(
-    dataset_dir="syn_lroa/",  # <--- 修改这里！改成你的数据集路径
+    dataset_dir="syn_lora/",  # <--- 修改这里！改成你的数据集路径
     num_frames=93,
     video_size=(704, 1280),  # 720 resolution, 16:9 aspect ratio
 )
@@ -43,7 +43,7 @@ example_video_dataset = L(Dataset)(
 dataloader_video_train = L(DataLoader)(
     dataset=example_video_dataset,
     sampler=L(get_sampler)(dataset=example_video_dataset),
-    batch_size=1,
+    batch_size=2,
     drop_last=True,
     num_workers=8,
     pin_memory=True,
@@ -74,7 +74,7 @@ predict2_video2world_training_2b_video2world_data = dict(
         )
     ),
     model_parallel=dict(
-        context_parallel_size=2,
+        context_parallel_size=8,
     ),
     dataloader_train=dataloader_video_train,
     trainer=dict(
