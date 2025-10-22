@@ -16,9 +16,11 @@ module load cuda/12.6
 
 PROJECT_DIR=/scratch/10102/hh29499/carcrashtwin
 cd "$PROJECT_DIR"
-source "$(dirname $(dirname $(which conda)))/etc/profile.d/conda.sh"
-conda init
+set +u
+source /scratch/10102/hh29499/anaconda/etc/profile.d/conda.sh
 conda activate cosmos-predict2
+set -u
+
 
 # NCCL/CPU env (safe defaults)
 export NCCL_DEBUG=INFO
