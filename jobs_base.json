@@ -1,42 +1,42 @@
 [
   {
-    "input_video": "/scratch/10102/hh29499/carcrashtwin/1022VIDEO/VV_1.jpg",
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/VIDEO_base/VV_1.jpg",
     "prompt": "In the video, a forward vehicle is turning into a cross direction. A straight-moving vehicle from the right side approaches and the two vehicles collide ahead. The forward car is Mini Cooper, a small compact hatchback, while the other car is Dodge Charger, a sporty mid-size sedan. The forward car travels at 45.0 km/h and the other at 30.0 km/h, under clear weather on a dry road surface.",
-    "output_video": "/scratch/10102/hh29499/carcrashtwin/1022VIDEO/generated/VV_1_base.mp4"
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/VIDEO_base/generated/VV_1_base.mp4"
   },
   {
-    "input_video": "/scratch/10102/hh29499/carcrashtwin/1022VIDEO/VV_3.jpg",
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/VIDEO_base/VV_3.jpg",
     "prompt": "In the video, a forward vehicle is turning into a cross direction. A straight-moving vehicle from the right side approaches and the two vehicles collide ahead. The forward car is Mercedes Sprinter, a tall cargo van for transport, while the other car is Mini Cooper, a small compact hatchback. The forward car travels at 25.0 km/h and the other at 30.0 km/h, under clear weather on a dry road surface.",
-    "output_video": "/scratch/10102/hh29499/carcrashtwin/1022VIDEO/generated/VV_3_base.mp4"
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/VIDEO_base/generated/VV_3_base.mp4"
   },
   {
-    "input_video": "/scratch/10102/hh29499/carcrashtwin/1022VIDEO/VV_4.jpg",
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/VIDEO_base/VV_4.jpg",
     "prompt": "In the video, a forward vehicle begins to turn left across the oncoming lane. An oncoming straight-moving vehicle approaches and the two vehicles collide ahead. The forward car is Nissan Patrol, a large off-road SUV, while the other car is Lincoln MKZ, a luxury mid-size sedan. The forward car travels at 30.0 km/h and the other at 35.0 km/h, under clear weather on a dry road surface.",
-    "output_video": "/scratch/10102/hh29499/carcrashtwin/1022VIDEO/generated/VV_4_base.mp4"
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/VIDEO_base/generated/VV_4_base.mp4"
   },
   {
-    "input_video": "/scratch/10102/hh29499/carcrashtwin/1022VIDEO/VV_5.jpg",
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/VIDEO_base/VV_5.jpg",
     "prompt": "In the video, a forward vehicle is turning into a cross direction. A straight-moving vehicle from the left side approaches and the two vehicles collide ahead. The forward car is Lincoln MKZ, a luxury mid-size sedan, while the other car is Dodge Charger Police, a patrol sedan with roof lights. The forward car travels at 25.0 km/h and the other at 35.0 km/h, under clear weather on a dry road surface.",
-    "output_video": "/scratch/10102/hh29499/carcrashtwin/1022VIDEO/generated/VV_5_base.mp4"
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/VIDEO_base/generated/VV_5_base.mp4"
   },
   {
-    "input_video": "/scratch/10102/hh29499/carcrashtwin/1022VIDEO/VV_6.jpg",
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/VIDEO_base/VV_6.jpg",
     "prompt": "In the video, a forward vehicle is driving straight ahead. A vehicle from the right side moves laterally across its path, and the two vehicles collide ahead. The forward car is Dodge Charger, a sporty mid-size sedan, while the other car is Lincoln MKZ, a luxury mid-size sedan. The forward car travels at 40.0 km/h and the other at 40.0 km/h, under clear weather on a dry road surface.",
-    "output_video": "/scratch/10102/hh29499/carcrashtwin/1022VIDEO/generated/VV_6_base.mp4"
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/VIDEO_base/generated/VV_6_base.mp4"
   },
   {
-    "input_video": "/scratch/10102/hh29499/carcrashtwin/1022VIDEO/VV_8.jpg",
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/VIDEO_base/VV_8.jpg",
     "prompt": "In the video, a forward vehicle is driving straight ahead. A vehicle from the left side moves laterally across its path, and the two vehicles collide ahead. The forward car is Dodge Charger, a sporty mid-size sedan, while the other car is Mercedes Sprinter, a tall cargo van for transport. The forward car travels at 40.0 km/h and the other at 25.0 km/h, under clear weather on a dry road surface.",
-    "output_video": "/scratch/10102/hh29499/carcrashtwin/1022VIDEO/generated/VV_8_base.mp4"
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/VIDEO_base/generated/VV_8_base.mp4"
   },
   {
-    "input_video": "/scratch/10102/hh29499/carcrashtwin/1022VIDEO/VV_9.jpg",
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/VIDEO_base/VV_9.jpg",
     "prompt": "In the video, a forward vehicle is driving straight ahead. A vehicle from the right side moves laterally across its path, and the two vehicles collide ahead. The forward car is Mercedes Sprinter, a tall cargo van for transport, while the other car is Nissan Patrol, a large off-road SUV. The forward car travels at 35.0 km/h and the other at 40.0 km/h, under clear weather on a dry road surface.",
-    "output_video": "/scratch/10102/hh29499/carcrashtwin/1022VIDEO/generated/VV_9_base.mp4"
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/VIDEO_base/generated/VV_9_base.mp4"
   },
   {
-    "input_video": "/scratch/10102/hh29499/carcrashtwin/1022VIDEO/VV_10.jpg",
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/VIDEO_base/VV_10.jpg",
     "prompt": "In the video, a forward vehicle is turning into a cross direction. A straight-moving vehicle from the left side approaches and the two vehicles collide ahead. The forward car is Ford Taxi, a city taxi sedan, while the other car is Mercedes Sprinter, a tall cargo van for transport. The forward car travels at 35.0 km/h and the other at 25.0 km/h, under clear weather on a dry road surface.",
-    "output_video": "/scratch/10102/hh29499/carcrashtwin/1022VIDEO/generated/VV_10_base.mp4"
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/VIDEO_base/generated/VV_10_base.mp4"
   }
 ]
