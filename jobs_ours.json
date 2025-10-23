@@ -38,5 +38,5 @@
     "input_video": "/scratch/10102/hh29499/carcrashtwin/1022VIDEO/VV_10.mp4",
     "prompt": "In the video, a forward vehicle is turning into a cross direction. A straight-moving vehicle from the left side approaches and the two vehicles collide ahead. The forward car is Ford Taxi, a city taxi sedan, while the other car is Mercedes Sprinter, a tall cargo van for transport. The forward car travels at 35.0 km/h and the other at 25.0 km/h, under clear weather on a dry road surface.",
     "output_video": "/scratch/10102/hh29499/carcrashtwin/1022VIDEO/generated/VV_10_ours.mp4"
-  },
+  }
 ]
