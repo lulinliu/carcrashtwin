@@ -1,12 +1,14 @@
 #!/bin/bash
 #SBATCH --job-name=video2world_10n
+#SBATCH -A CGAI24022
 #SBATCH -N 10                 # 10 个节点
 #SBATCH -p gh
 #SBATCH -t 6:00:00
 #SBATCH --ntasks-per-node=1   # 每节点 1 个 task
 #SBATCH --gres=gpu:1          # 每 task 1 张 GPU
-#SBATCH --output=slurm_logs/%x_%j.out
-#SBATCH --error=slurm_logs/%x_%j.err
+#SBATCH -o /scratch/10102/hh29499/carcrashtwin/%x_%j.out
+#SBATCH -e /scratch/10102/hh29499/carcrashtwin/%x_%j.err
+
 
 set -euo pipefail
 
