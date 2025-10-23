@@ -54,7 +54,7 @@ for IDX in $(seq 0 9); do
   echo "[LAUNCH] task=$IDX  videos=$VLIST  prompts=$PLIST"
 
   srun --nodes=1 --ntasks=1 --gres=gpu:1 --exclusive \
-    bash ./bash.sh \
+    bash ./run_10uq.sh \
       --videos-list "$VLIST" \
       --prompts-list "$PLIST" \
       --out "$OUTPUT_ROOT" \
