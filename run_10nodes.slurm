@@ -5,7 +5,6 @@
 #SBATCH -p gh
 #SBATCH -t 6:00:00
 #SBATCH --ntasks-per-node=1   # 每节点 1 个 task
-#SBATCH --gres=gpu:1          # 每 task 1 张 GPU
 #SBATCH -o /scratch/10102/hh29499/carcrashtwin/%x_%j.out
 #SBATCH -e /scratch/10102/hh29499/carcrashtwin/%x_%j.err
 
