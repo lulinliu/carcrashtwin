@@ -1,0 +1,92 @@
+[
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/VV_3_N1_V1.jpg",
+    "prompt": "Describe the collision from the video: a Mercedes Sprinter turning into a cross street collides with a Mini Cooper approaching from the right at 25.0 km/h and 30.0 km/h on a dry road in clear weather.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/VV_3_N1_V1_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/VV_3_N1_V2.jpg",
+    "prompt": "Describe the collision from the video: a Mercedes Sprinter turning into a cross street collides with a Mini Cooper approaching from the right at 25.0 km/h and 30.0 km/h on a dry road in clear weather.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/VV_3_N1_V2_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/VV_3_N1_V3.jpg",
+    "prompt": "Describe the collision from the video: a Mercedes Sprinter turning into a cross street collides with a Mini Cooper approaching from the right at 25.0 km/h and 30.0 km/h on a dry road in clear weather.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/VV_3_N1_V3_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/VV_3_N2_V1.jpg",
+    "prompt": "Provide a brief caption for the scene: tall Mercedes Sprinter turns across and hits a right-coming Mini Cooper on a dry, clear-day street, speeds 25 and 30 km/h.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/VV_3_N2_V1_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/VV_3_N2_V2.jpg",
+    "prompt": "Provide a brief caption for the scene: tall Mercedes Sprinter turns across and hits a right-coming Mini Cooper on a dry, clear-day street, speeds 25 and 30 km/h.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/VV_3_N2_V2_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/VV_3_N2_V3.jpg",
+    "prompt": "Provide a brief caption for the scene: tall Mercedes Sprinter turns across and hits a right-coming Mini Cooper on a dry, clear-day street, speeds 25 and 30 km/h.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/VV_3_N2_V3_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/VV_3_N3_V1.jpg",
+    "prompt": "Summarize the incident focusing on vehicle types and speeds: Mercedes Sprinter 25 km/h turning, Mini Cooper 30 km/h from right, collision at intersection on dry road, clear weather.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/VV_3_N3_V1_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/VV_3_N3_V2.jpg",
+    "prompt": "Summarize the incident focusing on vehicle types and speeds: Mercedes Sprinter 25 km/h turning, Mini Cooper 30 km/h from right, collision at intersection on dry road, clear weather.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/VV_3_N3_V2_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/VV_3_N3_V3.jpg",
+    "prompt": "Summarize the incident focusing on vehicle types and speeds: Mercedes Sprinter 25 km/h turning, Mini Cooper 30 km/h from right, collision at intersection on dry road, clear weather.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/VV_3_N3_V3_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/VV_4_N1_V1.jpg",
+    "prompt": "In the video, the forward Nissan Patrol begins to turn left across the oncoming lane as a Lincoln MKZ approaches straight; they collide ahead on a dry road in clear weather, with Patrol at 30.0 km/h and MKZ at 35.0 km/h.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/VV_4_N1_V1_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/VV_4_N1_V2.jpg",
+    "prompt": "In the video, the forward Nissan Patrol begins to turn left across the oncoming lane as a Lincoln MKZ approaches straight; they collide ahead on a dry road in clear weather, with Patrol at 30.0 km/h and MKZ at 35.0 km/h.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/VV_4_N1_V2_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/VV_4_N1_V3.jpg",
+    "prompt": "In the video, the forward Nissan Patrol begins to turn left across the oncoming lane as a Lincoln MKZ approaches straight; they collide ahead on a dry road in clear weather, with Patrol at 30.0 km/h and MKZ at 35.0 km/h.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/VV_4_N1_V3_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/VV_4_N2_V1.jpg",
+    "prompt": "A Nissan Patrol (forward vehicle) turns left across the oncoming lane while a Lincoln MKZ comes straight in the opposite lane; collision occurs ahead, speeds 30.0 km/h for Patrol and 35.0 km/h for MKZ, dry road, clear weather.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/VV_4_N2_V1_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/VV_4_N2_V2.jpg",
+    "prompt": "A Nissan Patrol (forward vehicle) turns left across the oncoming lane while a Lincoln MKZ comes straight in the opposite lane; collision occurs ahead, speeds 30.0 km/h for Patrol and 35.0 km/h for MKZ, dry road, clear weather.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/VV_4_N2_V2_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/VV_4_N2_V3.jpg",
+    "prompt": "A Nissan Patrol (forward vehicle) turns left across the oncoming lane while a Lincoln MKZ comes straight in the opposite lane; collision occurs ahead, speeds 30.0 km/h for Patrol and 35.0 km/h for MKZ, dry road, clear weather.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/VV_4_N2_V3_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/VV_4_N3_V1.jpg",
+    "prompt": "The Nissan Patrol, the forward car, executes a left turn across the oncoming lane; an oncoming Lincoln MKZ traveling straight collides ahead; conditions are clear and dry, speeds 30.0 and 35.0 km/h respectively.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/VV_4_N3_V1_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/VV_4_N3_V2.jpg",
+    "prompt": "The Nissan Patrol, the forward car, executes a left turn across the oncoming lane; an oncoming Lincoln MKZ traveling straight collides ahead; conditions are clear and dry, speeds 30.0 and 35.0 km/h respectively.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/VV_4_N3_V2_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/VV_4_N3_V3.jpg",
+    "prompt": "The Nissan Patrol, the forward car, executes a left turn across the oncoming lane; an oncoming Lincoln MKZ traveling straight collides ahead; conditions are clear and dry, speeds 30.0 and 35.0 km/h respectively.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/VV_4_N3_V3_ours.mp4"
+  }
+]

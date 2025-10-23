@@ -1,0 +1,92 @@
+[
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/SS_1_N1_V1.jpg",
+    "prompt": "In the video, a Mini Cooper, a small compact hatchback, turns into a cross street as a Dodge Charger approaches from the right; they pass safely ahead; speeds 45.0 km/h and 30.0 km/h; clear weather on a dry road surface.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/SS_1_N1_V1_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/SS_1_N1_V2.jpg",
+    "prompt": "In the video, a Mini Cooper, a small compact hatchback, turns into a cross street as a Dodge Charger approaches from the right; they pass safely ahead; speeds 45.0 km/h and 30.0 km/h; clear weather on a dry road surface.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/SS_1_N1_V2_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/SS_1_N1_V3.jpg",
+    "prompt": "In the video, a Mini Cooper, a small compact hatchback, turns into a cross street as a Dodge Charger approaches from the right; they pass safely ahead; speeds 45.0 km/h and 30.0 km/h; clear weather on a dry road surface.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/SS_1_N1_V3_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/SS_1_N2_V1.jpg",
+    "prompt": "A forward Mini Cooper turns into cross traffic while a Dodge Charger, a sporty mid-size sedan, travels from the right; both pass safely ahead; Mini at 45.0 km/h, Charger at 30.0 km/h; dry road with clear weather.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/SS_1_N2_V1_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/SS_1_N2_V2.jpg",
+    "prompt": "A forward Mini Cooper turns into cross traffic while a Dodge Charger, a sporty mid-size sedan, travels from the right; both pass safely ahead; Mini at 45.0 km/h, Charger at 30.0 km/h; dry road with clear weather.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/SS_1_N2_V2_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/SS_1_N2_V3.jpg",
+    "prompt": "A forward Mini Cooper turns into cross traffic while a Dodge Charger, a sporty mid-size sedan, travels from the right; both pass safely ahead; Mini at 45.0 km/h, Charger at 30.0 km/h; dry road with clear weather.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/SS_1_N2_V3_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/SS_1_N3_V1.jpg",
+    "prompt": "The forward Mini Cooper negotiates a turn into a cross direction with a Dodge Charger coming from the right; they pass safely ahead; speeds 45.0 km/h and 30.0 km/h; conditions: clear weather, dry surface.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/SS_1_N3_V1_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/SS_1_N3_V2.jpg",
+    "prompt": "The forward Mini Cooper negotiates a turn into a cross direction with a Dodge Charger coming from the right; they pass safely ahead; speeds 45.0 km/h and 30.0 km/h; conditions: clear weather, dry surface.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/SS_1_N3_V2_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/SS_1_N3_V3.jpg",
+    "prompt": "The forward Mini Cooper negotiates a turn into a cross direction with a Dodge Charger coming from the right; they pass safely ahead; speeds 45.0 km/h and 30.0 km/h; conditions: clear weather, dry surface.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/SS_1_N3_V3_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/SS_3_N1_V1.jpg",
+    "prompt": "In the video, a forward Mercedes Sprinter turns left onto a cross street as a Mini Cooper approaches from the right; the Sprinter travels at 25.0 km/h and the Mini at 30.0 km/h on a dry road in clear weather, and they pass safely ahead.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/SS_3_N1_V1_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/SS_3_N1_V2.jpg",
+    "prompt": "In the video, a forward Mercedes Sprinter turns left onto a cross street as a Mini Cooper approaches from the right; the Sprinter travels at 25.0 km/h and the Mini at 30.0 km/h on a dry road in clear weather, and they pass safely ahead.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/SS_3_N1_V2_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/SS_3_N1_V3.jpg",
+    "prompt": "In the video, a forward Mercedes Sprinter turns left onto a cross street as a Mini Cooper approaches from the right; the Sprinter travels at 25.0 km/h and the Mini at 30.0 km/h on a dry road in clear weather, and they pass safely ahead.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/SS_3_N1_V3_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/SS_3_N2_V1.jpg",
+    "prompt": "In the video, a forward Mercedes Sprinter turns right onto a cross street as a Mini Cooper approaches from the right; the Sprinter travels at 25.0 km/h and the Mini at 30.0 km/h on a dry road in clear weather, and they pass safely ahead.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/SS_3_N2_V1_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/SS_3_N2_V2.jpg",
+    "prompt": "In the video, a forward Mercedes Sprinter turns right onto a cross street as a Mini Cooper approaches from the right; the Sprinter travels at 25.0 km/h and the Mini at 30.0 km/h on a dry road in clear weather, and they pass safely ahead.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/SS_3_N2_V2_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/SS_3_N2_V3.jpg",
+    "prompt": "In the video, a forward Mercedes Sprinter turns right onto a cross street as a Mini Cooper approaches from the right; the Sprinter travels at 25.0 km/h and the Mini at 30.0 km/h on a dry road in clear weather, and they pass safely ahead.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/SS_3_N2_V3_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/SS_3_N3_V1.jpg",
+    "prompt": "In the video, a forward Mercedes Sprinter turns into a cross street while a Mini Cooper approaches from the right; speeds are 25.0 km/h and 30.0 km/h respectively, on a dry road with clear weather, and they pass safely ahead.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/SS_3_N3_V1_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/SS_3_N3_V2.jpg",
+    "prompt": "In the video, a forward Mercedes Sprinter turns into a cross street while a Mini Cooper approaches from the right; speeds are 25.0 km/h and 30.0 km/h respectively, on a dry road with clear weather, and they pass safely ahead.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/SS_3_N3_V2_ours.mp4"
+  },
+  {
+    "input_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/SS_3_N3_V3.jpg",
+    "prompt": "In the video, a forward Mercedes Sprinter turns into a cross street while a Mini Cooper approaches from the right; speeds are 25.0 km/h and 30.0 km/h respectively, on a dry road with clear weather, and they pass safely ahead.",
+    "output_video": "/scratch/10102/hh29499/carcrashtwin/1023jpg/generated/SS_3_N3_V3_ours.mp4"
+  }
+]
