@@ -15,6 +15,10 @@ set -euo pipefail
 # 两个 manifest：各有 10 行，逐行给出“每个节点要用的 txt 列表文件”的路径
 VIDEOS_MANIFEST="tasks_videos_manifest.txt"
 PROMPTS_MANIFEST="tasks_prompts_manifest.txt"
+export PROJECT_DIR="/scratch/10102/hh29499/carcrashtwin"          # repo root where examples.video2world lives
+export VIDEOS_MANIFEST="/scratch/10102/hh29499/carcrashtwin/tasks_videos_manifest.txt"
+export PROMPTS_MANIFEST="/scratch/10102/hh29499/carcrashtwin/tasks_prompts_manifest.txt"
+export OUTPUT_ROOT="/scratch/10102/hh29499/carcrashtwin/output_video2world_$(date +%Y%m%d_%H%M%S)"
 
 # 每个节点对应的列表 txt 里：逐行给出单个视频路径 / 单个 prompt，一一对应
 OUTPUT_ROOT="/scratch/10102/hh29499/carcrashtwin/output_video2world_$(date +%Y%m%d_%H%M%S)"
