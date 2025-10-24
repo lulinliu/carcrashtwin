@@ -1,13 +1,13 @@
 #!/bin/bash
-#SBATCH --job-name=v2w_101
-#SBATCH --account=CGAI24022            # ← 如需更换账本请改这里
+#SBATCH -J cosmos_8n1g
+#SBATCH -A CGAI24022    
 #SBATCH --partition=gh
-#SBATCH --nodes=10
+#SBATCH -N 8
 #SBATCH --ntasks-per-node=1
-#SBATCH --gpus-per-node=1              # Vista 上不要写 --gres，之前报错就是因为这个
-#SBATCH --time=10:00:00
-#SBATCH -o slurm_logs/%x_%j.out
-#SBATCH -e slurm_logs/%x_%j.err
+#SBATCH -t 16:00:00
+#SBATCH -o /scratch/10102/hh29499/carcrashtwin/%x_%j.out
+#SBATCH -e /scratch/10102/hh29499/carcrashtwin/%x_%j.err
+
 
 set -euo pipefail
 
