@@ -21,10 +21,10 @@ export PROMPTS_MANIFEST="/scratch/10102/hh29499/carcrashtwin/tasks_prompts_manif
 export OUTPUT_ROOT="/scratch/10102/hh29499/carcrashtwin/output_video2world_$(date +%Y%m%d_%H%M%S)"
 
 # 每个节点对应的列表 txt 里：逐行给出单个视频路径 / 单个 prompt，一一对应
-OUTPUT_ROOT="/scratch/10102/hh29499/carcrashtwin/output_video2world_$(date +%Y%m%d_%H%M%S)"
+export OUTPUT_ROOT="/scratch/10102/hh29499/carcrashtwin/output_video2world_$(date +%Y%m%d_%H%M%S)"
 
-MODEL_SIZE="2B"
-COND_FRAMES="1"
+export MODEL_SIZE="2B"
+export COND_FRAMES="1"
 
 mkdir -p slurm_logs
 mkdir -p "${OUTPUT_ROOT}"
