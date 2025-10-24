@@ -12,7 +12,6 @@
 
 set -euo pipefail
 
-# -------- env (can export before sbatch or edit here) ----------
 VIDEOS_MANIFEST="${VIDEOS_MANIFEST:-tasks_videos_manifest.txt}"     # 10 lines
 PROMPTS_MANIFEST="${PROMPTS_MANIFEST:-tasks_prompts_manifest.txt}"  # 10 lines
 OUTPUT_ROOT="${OUTPUT_ROOT:-outputs}"
@@ -20,9 +19,6 @@ MODEL_SIZE="${MODEL_SIZE:-2B}"
 COND_FRAMES="${COND_FRAMES:-5}"
 EXTRA_ARGS="${EXTRA_ARGS:-}"
 
-mkdir -p "$OUTPUT_ROOT"
-
-# Load lists
 mapfile -t VIDEO_LISTS < <(sed -e 's/^[[:space:]]*//; s/[[:space:]]*$//' "$VIDEOS_MANIFEST" | grep -v '^[[:space:]]*$')
 mapfile -t PROMPT_LISTS < <(sed -e 's/^[[:space:]]*//; s/[[:space:]]*$//' "$PROMPTS_MANIFEST" | grep -v '^[[:space:]]*$')
 
@@ -33,15 +29,9 @@ IDX="${SLURM_ARRAY_TASK_ID}"
 VLIST="${VIDEO_LISTS[$IDX]}"
 PLIST="${PROMPT_LISTS[$IDX]}"
 
-[[ -f "$VLIST" ]] || { echo "Missing video list: $VLIST"; exit 1; }
-[[ -f "$PLIST" ]] || { echo "Missing prompt list: $PLIST"; exit 1; }
-
 echo "[INFO] node=$HOSTNAME idx=$IDX gpu=$CUDA_VISIBLE_DEVICES"
-echo "[INFO] videos=$VLIST"
-echo "[INFO] prompts=$PLIST"
-echo "[INFO] out=$OUTPUT_ROOT model=$MODEL_SIZE cond=$COND_FRAMES"
+mkdir -p "$OUTPUT_ROOT"
 
-# Run directly (no srun here)
 bash ./run_10uq.sh \
   --videos-list "$VLIST" \
   --prompts-list "$PLIST" \
