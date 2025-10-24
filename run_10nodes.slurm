@@ -26,5 +26,5 @@ mkdir -p slurm_logs
 mkdir -p "${OUTPUT_ROOT}"
 
 # 每个任务各跑一个 worker；worker 会用 SLURM_PROCID 选取自己的那一行
-srun --ntasks=${SLURM_NTASKS} bash ./run_worker.sh
+srun --ntasks=${SLURM_NTASKS} bash ./run_10uq.sh
 echo "[INFO] Job ends at: $(date)"
