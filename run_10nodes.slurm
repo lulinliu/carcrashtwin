@@ -1,78 +1,52 @@
 #!/bin/bash
-#SBATCH --job-name=video2world_10n
+#SBATCH --job-name=video2world_10array
 #SBATCH -A CGAI24022
-#SBATCH -N 10                   # 10 个节点
 #SBATCH -p gh
-#SBATCH -t 6:00:00
-#SBATCH --ntasks-per-node=1     # 每节点 1 个 task
-#SBATCH --gpus-per-node=1       # ★ 在 gh 分区用这个，不要用 --gres
-#SBATCH -o /scratch/10102/hh29499/carcrashtwin/%x_%j.out
-#SBATCH -e /scratch/10102/hh29499/carcrashtwin/%x_%j.err
+#SBATCH -N 1
+#SBATCH --ntasks-per-node=1
+#SBATCH --gpus-per-node=1
+#SBATCH -t 10:00:00
+#SBATCH --array=0-9
+#SBATCH -o /scratch/10102/hh29499/carcrashtwin/%x_%A_%a.out
+#SBATCH -e /scratch/10102/hh29499/carcrashtwin/%x_%A_%a.err
 
 set -euo pipefail
 
-# ========== 必填/可配环境变量 ==========
-VIDEOS_MANIFEST="${VIDEOS_MANIFEST:-tasks_videos_manifest.txt}"     # 10 行，每行一个“视频列表txt”的路径
-PROMPTS_MANIFEST="${PROMPTS_MANIFEST:-tasks_prompts_manifest.txt}"  # 10 行，每行一个“prompt列表txt”的路径
-OUTPUT_ROOT="${OUTPUT_ROOT:-outputs}"                               # 输出根目录
+# -------- env (can export before sbatch or edit here) ----------
+VIDEOS_MANIFEST="${VIDEOS_MANIFEST:-tasks_videos_manifest.txt}"     # 10 lines
+PROMPTS_MANIFEST="${PROMPTS_MANIFEST:-tasks_prompts_manifest.txt}"  # 10 lines
+OUTPUT_ROOT="${OUTPUT_ROOT:-outputs}"
+MODEL_SIZE="${MODEL_SIZE:-2B}"
+COND_FRAMES="${COND_FRAMES:-5}"
+EXTRA_ARGS="${EXTRA_ARGS:-}"
 
-MODEL_SIZE="${MODEL_SIZE:-2B}"      # --model_size
-COND_FRAMES="${COND_FRAMES:-5}"     # --num_conditional_frames
-EXTRA_ARGS="${EXTRA_ARGS:-}"        # 追加给 python -m examples.video2world 的其他参数（可空）
+mkdir -p "$OUTPUT_ROOT"
 
-# ========== 基本检查 ==========
-mkdir -p slurm_logs "$OUTPUT_ROOT"
-
+# Load lists
 mapfile -t VIDEO_LISTS < <(sed -e 's/^[[:space:]]*//; s/[[:space:]]*$//' "$VIDEOS_MANIFEST" | grep -v '^[[:space:]]*$')
 mapfile -t PROMPT_LISTS < <(sed -e 's/^[[:space:]]*//; s/[[:space:]]*$//' "$PROMPTS_MANIFEST" | grep -v '^[[:space:]]*$')
 
-if [[ "${#VIDEO_LISTS[@]}" -ne 10 ]]; then
-  echo "[ERROR] $VIDEOS_MANIFEST must have exactly 10 non-empty lines." >&2; exit 1
-fi
-if [[ "${#PROMPT_LISTS[@]}" -ne 10 ]]; then
-  echo "[ERROR] $PROMPTS_MANIFEST must have exactly 10 non-empty lines." >&2; exit 1
-fi
+[[ "${#VIDEO_LISTS[@]}" -eq 10 ]] || { echo "Need 10 lines in $VIDEOS_MANIFEST"; exit 1; }
+[[ "${#PROMPT_LISTS[@]}" -eq 10 ]] || { echo "Need 10 lines in $PROMPTS_MANIFEST"; exit 1; }
 
-echo "[INFO] Using ${#VIDEO_LISTS[@]} video lists and ${#PROMPT_LISTS[@]} prompt lists."
-echo "[INFO] MODEL_SIZE=$MODEL_SIZE  COND_FRAMES=$COND_FRAMES"
-echo "[INFO] OUTPUT_ROOT=$OUTPUT_ROOT"
+IDX="${SLURM_ARRAY_TASK_ID}"
+VLIST="${VIDEO_LISTS[$IDX]}"
+PLIST="${PROMPT_LISTS[$IDX]}"
 
-# ========== 并发启动 10 个 task（每 task 绑定 1 节点 / 1 GPU）==========
-pids=()
-for IDX in $(seq 0 9); do
-  VLIST="${VIDEO_LISTS[$IDX]}"
-  PLIST="${PROMPT_LISTS[$IDX]}"
+[[ -f "$VLIST" ]] || { echo "Missing video list: $VLIST"; exit 1; }
+[[ -f "$PLIST" ]] || { echo "Missing prompt list: $PLIST"; exit 1; }
 
-  [[ -f "$VLIST" ]] || { echo "[ERROR] Video list for task $IDX not found: $VLIST" >&2; exit 1; }
-  [[ -f "$PLIST" ]] || { echo "[ERROR] Prompt list for task $IDX not found: $PLIST" >&2; exit 1; }
+echo "[INFO] node=$HOSTNAME idx=$IDX gpu=$CUDA_VISIBLE_DEVICES"
+echo "[INFO] videos=$VLIST"
+echo "[INFO] prompts=$PLIST"
+echo "[INFO] out=$OUTPUT_ROOT model=$MODEL_SIZE cond=$COND_FRAMES"
 
-  echo "[LAUNCH] task=$IDX  videos=$VLIST  prompts=$PLIST"
-
-  # ★ 关键改动：不要 --gres=gpu:1，改用 --gpus=1；仍然独占节点
-  srun --nodes=1 --ntasks=1 --gpus=1 --exclusive \
-    bash ./run_10uq.sh \
-      --videos-list "$VLIST" \
-      --prompts-list "$PLIST" \
-      --out "$OUTPUT_ROOT" \
-      --model "$MODEL_SIZE" \
-      --cond "$COND_FRAMES" \
-      --extra "$EXTRA_ARGS" \
-      --task-idx "$IDX" &
-
-  pids+=( $! )
-done
-
-# 等所有子任务结束
-status=0
-for pid in "${pids[@]}"; do
-  if ! wait "$pid"; then
-    status=1
-  fi
-done
-
-if [[ $status -ne 0 ]]; then
-  echo "[DONE] Some tasks failed. Check logs."
-  exit 1
-fi
-
-echo "[DONE] All 10 tasks finished."
+# Run directly (no srun here)
+bash ./run_10uq.sh \
+  --videos-list "$VLIST" \
+  --prompts-list "$PLIST" \
+  --out "$OUTPUT_ROOT" \
+  --model "$MODEL_SIZE" \
+  --cond "$COND_FRAMES" \
+  --extra "$EXTRA_ARGS" \
+  --task-idx "$IDX"
