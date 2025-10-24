@@ -1,42 +1,54 @@
 #!/bin/bash
-#SBATCH --job-name=video2world_10array
-#SBATCH -A CGAI24022
-#SBATCH -p gh
-#SBATCH -N 1
+#SBATCH --job-name=v2w_101
+#SBATCH --account=CGAI24022            # ← 如需更换账本请改这里
+#SBATCH --partition=gh
+#SBATCH --nodes=10
 #SBATCH --ntasks-per-node=1
-#SBATCH --gpus-per-node=1
-#SBATCH -t 10:00:00
-#SBATCH --array=0-9
-#SBATCH -o /scratch/10102/hh29499/carcrashtwin/%x_%A_%a.out
-#SBATCH -e /scratch/10102/hh29499/carcrashtwin/%x_%A_%a.err
+#SBATCH --gpus-per-node=1              # Vista 上不要写 --gres，之前报错就是因为这个
+#SBATCH --time=10:00:00
+#SBATCH -o slurm_logs/%x_%j.out
+#SBATCH -e slurm_logs/%x_%j.err
 
 set -euo pipefail
 
-VIDEOS_MANIFEST="${VIDEOS_MANIFEST:-tasks_videos_manifest.txt}"     # 10 lines
-PROMPTS_MANIFEST="${PROMPTS_MANIFEST:-tasks_prompts_manifest.txt}"  # 10 lines
-OUTPUT_ROOT="${OUTPUT_ROOT:-outputs}"
-MODEL_SIZE="${MODEL_SIZE:-2B}"
-COND_FRAMES="${COND_FRAMES:-5}"
-EXTRA_ARGS="${EXTRA_ARGS:-}"
+#################### 可按需修改的变量 ####################
+# 两个 manifest：各有 10 行，逐行给出“每个节点要用的 txt 列表文件”的路径
+VIDEOS_MANIFEST="tasks_videos_manifest.txt"
+PROMPTS_MANIFEST="tasks_prompts_manifest.txt"
 
-mapfile -t VIDEO_LISTS < <(sed -e 's/^[[:space:]]*//; s/[[:space:]]*$//' "$VIDEOS_MANIFEST" | grep -v '^[[:space:]]*$')
-mapfile -t PROMPT_LISTS < <(sed -e 's/^[[:space:]]*//; s/[[:space:]]*$//' "$PROMPTS_MANIFEST" | grep -v '^[[:space:]]*$')
+# 每个节点对应的列表 txt 里：逐行给出单个视频路径 / 单个 prompt，一一对应
+OUTPUT_ROOT="/scratch/10102/hh29499/carcrashtwin/output_video2world_$(date +%Y%m%d_%H%M%S)"
 
-[[ "${#VIDEO_LISTS[@]}" -eq 10 ]] || { echo "Need 10 lines in $VIDEOS_MANIFEST"; exit 1; }
-[[ "${#PROMPT_LISTS[@]}" -eq 10 ]] || { echo "Need 10 lines in $PROMPTS_MANIFEST"; exit 1; }
+MODEL_SIZE="2B"
+COND_FRAMES="1"
 
-IDX="${SLURM_ARRAY_TASK_ID}"
-VLIST="${VIDEO_LISTS[$IDX]}"
-PLIST="${PROMPT_LISTS[$IDX]}"
+# 你的代码根目录（含 examples/video2world 模块）
+PROJECT_DIR="/scratch/10102/hh29499/carcrashtwin"
+CONDA_ENV="cosmos-predict2"
+########################################################
 
-echo "[INFO] node=$HOSTNAME idx=$IDX gpu=$CUDA_VISIBLE_DEVICES"
-mkdir -p "$OUTPUT_ROOT"
+mkdir -p slurm_logs
+mkdir -p "${OUTPUT_ROOT}"
 
-bash ./run_10uq.sh \
-  --videos-list "$VLIST" \
-  --prompts-list "$PLIST" \
-  --out "$OUTPUT_ROOT" \
-  --model "$MODEL_SIZE" \
-  --cond "$COND_FRAMES" \
-  --extra "$EXTRA_ARGS" \
-  --task-idx "$IDX"
+echo "[INFO] Job starts at: $(date)"
+echo "[INFO] Output root   : ${OUTPUT_ROOT}"
+
+module load gcc/13.2.0
+module load cuda/12.6
+
+# 激活环境（两种方式择其一都写上，避免登录壳差异）
+if command -v conda >/dev/null 2>&1; then
+  # shellcheck disable=SC1091
+  source ~/.bashrc || true
+  conda activate "${CONDA_ENV}" || true
+fi
+
+# 也允许使用 conda run（worker 里仍会检测一次）
+export PROJECT_DIR OUTPUT_ROOT MODEL_SIZE COND_FRAMES \
+       VIDEOS_MANIFEST PROMPTS_MANIFEST CONDA_ENV
+
+cd "${PROJECT_DIR}"
+
+# 每个任务各跑一个 worker；worker 会用 SLURM_PROCID 选取自己的那一行
+srun --ntasks=${SLURM_NTASKS} bash ./run_worker.sh
+echo "[INFO] Job ends at: $(date)"
