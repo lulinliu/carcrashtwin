@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -J cosmos_8n1g
+#SBATCH -J cosmos_8n1g_10k
 #SBATCH -A CGAI24022
 #SBATCH -p gh
 #SBATCH -N 8
@@ -9,4 +9,4 @@
 #SBATCH -e /scratch/10102/hh29499/carcrashtwin/%x_%j.err
 
 srun --ntasks=${SLURM_JOB_NUM_NODES} --ntasks-per-node=1 --export=ALL \
-  bash /scratch/10102/hh29499/carcrashtwin/singleone.sh
+  bash /scratch/10102/hh29499/carcrashtwin/run1.sh
