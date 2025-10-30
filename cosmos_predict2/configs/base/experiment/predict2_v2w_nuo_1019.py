@@ -27,7 +27,7 @@ from imaginaire.lazy_config import LazyCall as L
 print("[DEBUG] loaded experiment: predict2_video2world_lora_training_2b_custom_data")
 
 custom_video_lora_dataset = L(Dataset)(
-    dataset_dir="syn_lora_1029/",  # <--- 修改这里！改成你的数据集路径
+    dataset_dir="data_fsyn/", # <--- 修改这里！改成你的数据集路径
     num_frames=93,                                          # 视频帧数
     # video_size=(480,832),                                 # resolution (H * W)
     video_size=(704,1280) 
