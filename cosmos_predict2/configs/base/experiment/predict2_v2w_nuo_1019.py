@@ -169,6 +169,6 @@ for _item in [
     cs.store(
         group="experiment",
         package="_global_",
-        name="predict2_video2world_lora_training_2b_1019nuo",
+        name="predict2_video2world_lora_training_2b_1019nuo_data",
         node=_item,
     )
