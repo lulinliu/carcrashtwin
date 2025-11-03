@@ -24,7 +24,7 @@ cs = ConfigStore.instance()
 
 from imaginaire.lazy_config import LazyCall as L
 
-print("[DEBUG] loaded experiment: predict2_video2world_lora_training_2b_custom_data")
+print("[DEBUG] loaded experiment: predict2_video2world_lora_training_14b_custom_data")
 
 custom_video_lora_dataset = L(Dataset)(
     dataset_dir="hot_cosmos/",  # <--- 修改这里！改成你的数据集路径
@@ -46,9 +46,9 @@ dataloader_video_train_lora = L(DataLoader)(
 # =================================================================================
 # 2. 为 2B 模型创建 LoRA 训练配置
 # =================================================================================
-predict2_video2world_lora_training_2b_custom_data = dict(
+predict2_video2world_lora_training_14b_custom_data = dict(
     defaults=[
-        {"override /model": "predict2_video2world_fsdp_2b"},
+        {"override /model": "predict2_video2world_fsdp_14b"},
         {"override /optimizer": "fusedadamw"},
         {"override /scheduler": "lambdalinear"},
         {"override /ckpt_type": "standard"},
@@ -58,13 +58,13 @@ predict2_video2world_lora_training_2b_custom_data = dict(
     job=dict(
         project="posttraining",
         group="video2world_lora",
-        name="2b_custom_data_nuo_1019",  # Name the experiment --> affect the output directory path
+        name="14b_custom_data_nuo_1019",  # Name the experiment --> affect the output directory path
     ),
     model=dict(
         config=dict(
             train_architecture="lora",  # 启用 LoRA
-            lora_rank=16, # default 16
-            lora_alpha=16,  # default 16
+            lora_rank=32, # default 16
+            lora_alpha=32,  # default 16
             # lora_target_modules="q_proj,k_proj,v_proj",
             lora_target_modules="q_proj,k_proj,v_proj,output_proj,mlp.layer1,mlp.layer2", # default
             init_lora_weights=True,
@@ -163,12 +163,12 @@ predict2_video2world_lora_training_2b_custom_data = dict(
 
 
 for _item in [
-    predict2_video2world_lora_training_2b_custom_data,
+    predict2_video2world_lora_training_14b_custom_data,
 ]:
     experiment_name = [name.lower() for name, value in globals().items() if value is _item][0]
     cs.store(
         group="experiment",
         package="_global_",
-        name="predict2_video2world_lora_training_2b_1030nuo_14b",
+        name="predict2_video2world_lora_training_14b_1030nuo_14b",
         node=_item,
     )
