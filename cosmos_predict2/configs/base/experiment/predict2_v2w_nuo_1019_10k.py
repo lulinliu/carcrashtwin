@@ -27,7 +27,7 @@ from imaginaire.lazy_config import LazyCall as L
 print("[DEBUG] loaded experiment: predict2_video2world_lora_training_2b_custom_data")
 
 custom_video_lora_dataset = L(Dataset)(
-    dataset_dir="data_fsyn/",  # <--- 修改这里！改成你的数据集路径
+    dataset_dir="hot_cosmos/",  # <--- 修改这里！改成你的数据集路径
     num_frames=93,                                          # 视频帧数
     # video_size=(480,832),                                 # resolution (H * W)
     video_size=(704,1280) 
@@ -63,8 +63,8 @@ predict2_video2world_lora_training_2b_custom_data = dict(
     model=dict(
         config=dict(
             train_architecture="lora",  # 启用 LoRA
-            lora_rank=24, # default 16
-            lora_alpha=24,  # default 16
+            lora_rank=16, # default 16
+            lora_alpha=16,  # default 16
             # lora_target_modules="q_proj,k_proj,v_proj",
             lora_target_modules="q_proj,k_proj,v_proj,output_proj,mlp.layer1,mlp.layer2", # default
             init_lora_weights=True,
