@@ -58,7 +58,7 @@ predict2_video2world_lora_training_2b_custom_data = dict(
     job=dict(
         project="posttraining",
         group="video2world_lora",
-        name="2b_custom_data_nuo_1019",  # Name the experiment --> affect the output directory path
+        name="2b_custom_data_hot3d_3k",  # Name the experiment --> affect the output directory path
     ),
     model=dict(
         config=dict(
