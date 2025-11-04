@@ -58,7 +58,7 @@ predict2_video2world_lora_training_14b_custom_data = dict(
     job=dict(
         project="posttraining",
         group="video2world_lora",
-        name="14b_custom_data_nuo_1019",  # Name the experiment --> affect the output directory path
+        name="14b_custom_data_hot3d",  # Name the experiment --> affect the output directory path
     ),
     model=dict(
         config=dict(
@@ -78,7 +78,7 @@ predict2_video2world_lora_training_14b_custom_data = dict(
     ),
 
     model_parallel=dict(
-        context_parallel_size=4,
+        context_parallel_size=8,
     ),
     dataloader_train=dataloader_video_train_lora,
     trainer=dict(
