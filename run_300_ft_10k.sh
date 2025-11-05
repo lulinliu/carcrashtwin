@@ -17,9 +17,10 @@ mkdir -p "$OUT_ROOT"
 DIT_PATH="/scratch/10102/hh29499/carcrashtwin/checkpoints/posttraining/lora_10k/2b_custom_data_nuo_1019_10k/checkpoints/model/iter_000010000.pt"
 
 #################### 分布式相关（slurm 传进来） ####################
-WORLD_SIZE="${WORLD_SIZE:-1}"     # 一共有几个 worker（你8个节点就是8）
-WORKER_RANK="${WORKER_RANK:-0}"   # 我是第几个 worker（0 ~ WORLD_SIZE-1）
-GPU_ID="${GPU_ID:-0}"             # 这一张卡
+WORLD_SIZE="${SLURM_NTASKS:-${WORLD_SIZE:-1}}"
+WORKER_RANK="${SLURM_PROCID:-${WORKER_RANK:-0}}"
+GPU_ID="${SLURM_LOCALID:-${GPU_ID:-0}}"
+
 #################### 分布式相关 ####################
 
 cd "$REPO_ROOT"
