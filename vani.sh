@@ -16,9 +16,10 @@ mkdir -p "$OUT_ROOT"
 # DIT_PATH="/scratch/10102/hh29499/carcrashtwin/real_world_3k/checkpoints/model/iter_000003000.pt"
 
 #################### 分布式相关（slurm 传进来） ####################
-WORLD_SIZE="${WORLD_SIZE:-1}"
-WORKER_RANK="${WORKER_RANK:-0}"
-GPU_ID="${GPU_ID:-0}"
+WORLD_SIZE="${SLURM_NTASKS:-${WORLD_SIZE:-1}}"
+WORKER_RANK="${SLURM_PROCID:-${WORKER_RANK:-0}}"
+GPU_ID="${SLURM_LOCALID:-${GPU_ID:-0}}"
+
 #################### 分布式相关 ####################
 
 cd "$REPO_ROOT"
