@@ -9,4 +9,4 @@
 #SBATCH -e /scratch/10102/hh29499/carcrashtwin/%x_%j.err
 
 srun --ntasks=${SLURM_JOB_NUM_NODES} --ntasks-per-node=1 --export=ALL \
-  bash /scratch/10102/hh29499/carcrashtwin/run_300_ft.sh
+  bash /scratch/10102/hh29499/carcrashtwin/run_300_ft_10k.sh
