@@ -4,7 +4,7 @@
 #SBATCH -p gh
 #SBATCH -N 8
 #SBATCH --ntasks-per-node=1
-#SBATCH -t 32:00:00
+#SBATCH -t 60:00:00
 #SBATCH -o /scratch/10102/hh29499/carcrashtwin/%x_%j.out
 #SBATCH -e /scratch/10102/hh29499/carcrashtwin/%x_%j.err
 
