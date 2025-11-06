@@ -2,11 +2,11 @@
 set -euo pipefail
 
 # 1) your repo
-REPO_ID="luuuulinnnn/tacc_output_cosmos"
+REPO_ID="luuuulinnnn/tacc_output_cosmos_300"
 
 # 2) paths
 BASE_DIR="/scratch/10102/hh29499/carcrashtwin"
-TMP_DIR="/scratch/10102/hh29499/tmp_hf_upload"
+TMP_DIR="/scratch/10102/hh29499/tmp_hf_upload_new"
 mkdir -p "$TMP_DIR"
 
 cd "$BASE_DIR"
@@ -21,8 +21,12 @@ huggingface-cli repo create "$REPO_ID" --type dataset --private -y || true
 tar -cf "$TMP_DIR/cosmos_out_ft_rw_3k.tar"  cosmos_out_ft_rw_3k
 tar -cf "$TMP_DIR/cosmos_out_ft_syn_3k.tar" cosmos_out_ft_syn_3k
 tar -cf "$TMP_DIR/cosmos_out_van.tar"       cosmos_out_van
+tar -cf "$TMP_DIR/cosmos_out_ft_syn10k.tar"       cosmos_out_ft
+
 
 # 6) upload the tars
 huggingface-cli upload "$REPO_ID" "$TMP_DIR/cosmos_out_ft_rw_3k.tar"  "cosmos_out_ft_rw_3k.tar"  --repo-type dataset --commit-message "add rw 3k"
 huggingface-cli upload "$REPO_ID" "$TMP_DIR/cosmos_out_ft_syn_3k.tar" "cosmos_out_ft_syn_3k.tar" --repo-type dataset --commit-message "add syn 3k"
 huggingface-cli upload "$REPO_ID" "$TMP_DIR/cosmos_out_van.tar"       "cosmos_out_van.tar"       --repo-type dataset --commit-message "add van"
+huggingface-cli upload "$REPO_ID" "$TMP_DIR/cosmos_out_ft_syn10k.tar"       "cosmos_out_ft_syn10k.tar"       --repo-type dataset --commit-message "add syn10k"
+
