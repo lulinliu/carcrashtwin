@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -J cosmos_hot3d_14
+#SBATCH -J cosmos_hot3d_14_again
 #SBATCH -A CGAI24022
 #SBATCH -p gh
 #SBATCH -N 8
