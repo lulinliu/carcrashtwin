@@ -6,11 +6,10 @@ set -euo pipefail
 REPO_ROOT="/scratch/10102/hh29499/carcrashtwin"
 
 # 输入
-FIRST_DIR="${REPO_ROOT}/metric300/test_set_first"
-PROMPT_DIR="${REPO_ROOT}/metric300/txt1027_test_set"
-
+FIRST_DIR="${REPO_ROOT}/raw_real41_img"
+PROMPT_DIR="${REPO_ROOT}/txt_real41"
 # 输出
-OUT_ROOT="${REPO_ROOT}/cosmos_out_ft_syn_3k"
+OUT_ROOT="${REPO_ROOT}/cosmos_out_ft_syn_3k_344"
 mkdir -p "$OUT_ROOT"
 
 # 模型权重（按你给的命令来，走相对路径）
