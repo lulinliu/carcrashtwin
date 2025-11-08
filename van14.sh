@@ -4,12 +4,10 @@ set -euo pipefail
 #################### 路径配置 ####################
 REPO_ROOT="/scratch/10102/hh29499/carcrashtwin"
 
-# 输入
-FIRST_DIR="${REPO_ROOT}/metric300/test_set_first"
-PROMPT_DIR="${REPO_ROOT}/metric300/txt1027_test_set"
-
+FIRST_DIR="${REPO_ROOT}/raw_real41_img"
+PROMPT_DIR="${REPO_ROOT}/txt_real41"
 # 输出
-OUT_ROOT="${REPO_ROOT}/cosmos_out_van14b"
+OUT_ROOT="${REPO_ROOT}/cosmos_out_van14b_344"
 mkdir -p "$OUT_ROOT"
 
 # 如果你这个纯推理也要指定权重，就在这里写；如果 examples/video2world 自己会load默认model，可以不写
