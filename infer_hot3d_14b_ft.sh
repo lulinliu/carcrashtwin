@@ -65,7 +65,7 @@ for ((i=0; i<TOTAL; i++)); do
   # ====== 真正的 cosmos LoRA 推理命令 ======
   CUDA_VISIBLE_DEVICES="$GPU_ID" \
   python examples/video2world_lora.py \
-    --model_size 2B \
+    --model_size 14B \
     --dit_path "$DIT_PATH" \
     --input_path "$img_file" \
     --prompt "$(head -n 1 "$prompt_file")" \
