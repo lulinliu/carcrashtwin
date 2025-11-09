@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -J cosmos_hot3b2b_ft
+#SBATCH -J cosmos_hot3b14b_ft
 #SBATCH -A CGAI24022
 #SBATCH -p gh
 #SBATCH -N 16
@@ -10,3 +10,4 @@
 
 srun --export=ALL \
   bash /scratch/10102/hh29499/carcrashtwin/infer_hot3d_14b_ft.sh
+
