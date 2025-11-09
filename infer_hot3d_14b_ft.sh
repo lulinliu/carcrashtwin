@@ -14,7 +14,7 @@ OUT_ROOT="${REPO_ROOT}/cosmos_14b_ft"
 mkdir -p "$OUT_ROOT"
 
 # 模型权重（按你给的命令来，走相对路径）
-DIT_PATH="/scratch/10102/hh29499/carcrashtwin/checkpoints/posttraining/lora_10k/2b_custom_data_nuo_1019_10k/checkpoints/model/iter_000010000.pt"
+DIT_PATH="/scratch/10102/hh29499/carcrashtwin/checkpoints/posttraining/video2world_lora/14b_custom_data_hot3d/checkpoints/model/iter_000010000.pt"
 
 #################### 分布式相关（slurm 传进来） ####################
 WORLD_SIZE="${SLURM_NTASKS:-${WORLD_SIZE:-1}}"
