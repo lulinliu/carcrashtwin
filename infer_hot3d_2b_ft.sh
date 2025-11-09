@@ -71,8 +71,8 @@ for ((i=0; i<TOTAL; i++)); do
     --prompt "$(head -n 1 "$prompt_file")" \
     --save_path "$outmp4" \
     --use_lora \
-    --lora_rank 24 \
-    --lora_alpha 24 \
+    --lora_rank 16 \
+    --lora_alpha 16 \
     --lora_target_modules "q_proj,k_proj,v_proj,output_proj,mlp.layer1,mlp.layer2" \
     --disable_guardrail \
     --disable_prompt_refiner
