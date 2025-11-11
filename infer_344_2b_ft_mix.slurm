@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -J cosmos_mix_2b_ft
+#SBATCH -J cosmos_mix_2b_ft_10k
 #SBATCH -A CGAI24022
 #SBATCH -p gh
 #SBATCH -N 16
