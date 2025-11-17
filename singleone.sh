@@ -24,7 +24,7 @@ torchrun \
   --master_port="${MASTER_PORT}" \
   -m scripts.train \
   --config=cosmos_predict2/configs/base/config.py \
-  -- experiment=predict2_video2world_lora_training_2b_nov11_5k \
+  -- experiment=predict2_video2world_lora_training_14b_realnuo_14b_1117 \
   model.config.train_architecture=lora
 
   
