@@ -2,7 +2,7 @@
 #SBATCH -J cosmos_hot3b2b_ft
 #SBATCH -A CGAI24022
 #SBATCH -p gh
-#SBATCH -N 16
+#SBATCH -N 2
 #SBATCH --ntasks-per-node=1
 #SBATCH -t 10:00:00
 #SBATCH -o /scratch/10102/hh29499/carcrashtwin/%x_%j.out
